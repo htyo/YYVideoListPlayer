@@ -1,6 +1,6 @@
-use_frameworks!
+use_frameworks! :linkage => :static
 
-platform :ios, '10.0'
+platform :ios, '13.0'
 
 target 'YYVideoListPlayer_Example' do
   pod 'YYVideoListPlayer', :path => '../'
@@ -17,10 +17,32 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = ''
     end
-    
-    installer.pods_project.build_configurations.each do |config|
-        config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+  end
+
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = ''
+  end
+
+  xcconfig_paths = []
+  installer.aggregate_targets.each do |aggregate_target|
+    aggregate_target.xcconfigs.each_key do |config_name|
+      xcconfig_paths << aggregate_target.xcconfig_path(config_name)
     end
+  end
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      ref = config.base_configuration_reference
+      xcconfig_paths << ref.real_path if ref
+    end
+  end
+  xcconfig_paths.compact.each do |path|
+    content = File.read(path)
+    new_content = content.gsub(
+      /^EXCLUDED_ARCHS\[sdk=iphonesimulator\*\]\s*=\s*arm64\s*$/,
+      'EXCLUDED_ARCHS[sdk=iphonesimulator*] = '
+    )
+    File.write(path, new_content) if new_content != content
   end
 end

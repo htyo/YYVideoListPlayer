@@ -5,7 +5,7 @@
 //  Created by yanbao on 2026/3/30.
 //
 
-#import "MJRefresh.h"
+#import <MJRefresh/MJRefresh.h>
 #import "YYVideoListPlayerController.h"
 #import "YYVideoListPlayerView.h"
 #import "YYVideoListPlayerCell.h"

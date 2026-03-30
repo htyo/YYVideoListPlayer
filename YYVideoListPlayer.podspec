@@ -42,6 +42,6 @@ TODO: Add long description of the pod here.
   s.static_framework = true
   s.dependency 'ZFPlayer/AVPlayer'
   s.dependency 'MJRefresh'
-  s.dependency 'Masonry'
+#  s.dependency 'Masonry'
 
 end

@@ -6,8 +6,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZFPlayer.h"
-#import "ZFAVPlayerManager.h"
+#import <ZFPlayer/ZFPlayer.h>
+#import <ZFPlayer/ZFAVPlayerManager.h>
 #import "YYVideoListPlayerModel.h"
 
 

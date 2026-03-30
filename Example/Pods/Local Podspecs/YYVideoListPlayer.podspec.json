@@ -1,7 +1,7 @@
 {
   "name": "YYVideoListPlayer",
   "version": "1.0.0",
-  "summary": "A short description of YYVideoListPlayer.",
+  "summary": "A short description of YYVideoListPlayer. ZFAVPlayerManager 313 行 将 &&  改 ||",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/htyo/YYVideoListPlayer",
   "license": {

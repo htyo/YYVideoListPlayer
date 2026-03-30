@@ -4,7 +4,7 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - MJRefresh (3.7.6)
+  - MJRefresh (3.7.9)
   - YYVideoListPlayer (1.0.0):
     - MJRefresh
     - ZFPlayer/AVPlayer
@@ -28,10 +28,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  MJRefresh: 2fe7fb43a5167ceda20bb7e63f130c04fd1814a5
-  YYVideoListPlayer: 79c4b80e2ba680f7c7cad01f45f4ff40a96153e8
+  MJRefresh: ff9e531227924c84ce459338414550a05d2aea78
+  YYVideoListPlayer: b369d2b7db7a91fbdff8f106913d899837508f30
   ZFPlayer: 5cf39e8d9f0c2394a014b0db4767b5b5a6bffe13
 
-PODFILE CHECKSUM: c0e280c8f45f424aa74c8b4b116c4cc68d0ce7c5
+PODFILE CHECKSUM: d9b44578fe3c8e48a15b5d9f0e5b83f289f673e9
 
 COCOAPODS: 1.16.2
