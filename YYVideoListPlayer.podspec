@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'YYVideoListPlayer'
   s.version          = '1.0.0'
-  s.summary          = 'A short description of YYVideoListPlayer. ZFAVPlayerManager 313 行 将 &&  改 ||'
+  s.summary          = 'iOS video list player built on ZFPlayer for smooth scrolling playback.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,9 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+YYVideoListPlayer provides a lightweight video list experience for iOS using
+ZFPlayer/AVPlayer. It focuses on smooth scrolling playback, reusable player
+views, and simple integration for feed-style UIs.
                        DESC
 
   s.homepage         = 'https://github.com/htyo/YYVideoListPlayer'
