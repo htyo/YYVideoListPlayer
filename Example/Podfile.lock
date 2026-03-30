@@ -1,0 +1,37 @@
+PODS:
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+  - MJRefresh (3.7.6)
+  - YYVideoListPlayer (1.0.0):
+    - MJRefresh
+    - ZFPlayer/AVPlayer
+  - ZFPlayer/AVPlayer (4.1.4):
+    - ZFPlayer/Core
+  - ZFPlayer/Core (4.1.4)
+
+DEPENDENCIES:
+  - FBSnapshotTestCase
+  - YYVideoListPlayer (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - FBSnapshotTestCase
+    - MJRefresh
+    - ZFPlayer
+
+EXTERNAL SOURCES:
+  YYVideoListPlayer:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  MJRefresh: 2fe7fb43a5167ceda20bb7e63f130c04fd1814a5
+  YYVideoListPlayer: 79c4b80e2ba680f7c7cad01f45f4ff40a96153e8
+  ZFPlayer: 5cf39e8d9f0c2394a014b0db4767b5b5a6bffe13
+
+PODFILE CHECKSUM: c0e280c8f45f424aa74c8b4b116c4cc68d0ce7c5
+
+COCOAPODS: 1.16.2

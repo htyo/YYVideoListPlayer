@@ -1,0 +1,6 @@
+framework module Pods_YYVideoListPlayer_Tests {
+  umbrella header "Pods-YYVideoListPlayer_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module YYVideoListPlayer {
+  umbrella header "YYVideoListPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}
