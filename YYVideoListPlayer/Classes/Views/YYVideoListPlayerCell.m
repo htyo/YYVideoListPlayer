@@ -59,38 +59,12 @@
     view.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView insertSubview:view atIndex:0];
     
-
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                     attribute:NSLayoutAttributeLeft
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self.contentView
-                                                     attribute:NSLayoutAttributeLeft
-                                                    multiplier:1.0
-                                                      constant:0]];
-    
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                     attribute:NSLayoutAttributeRight
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self.contentView
-                                                     attribute:NSLayoutAttributeRight
-                                                    multiplier:1.0
-                                                      constant:0]];
-    
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                     attribute:NSLayoutAttributeTop
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self.contentView
-                                                     attribute:NSLayoutAttributeTop
-                                                    multiplier:1.0
-                                                      constant:0]];
-    
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                     attribute:NSLayoutAttributeBottom
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self.contentView
-                                                     attribute:NSLayoutAttributeBottom
-                                                    multiplier:1.0
-                                                      constant:0]];
+    [NSLayoutConstraint activateConstraints:@[
+        [view.topAnchor constraintEqualToAnchor:self.contentView.topAnchor],
+        [view.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor],
+        [view.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor],
+        [view.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor],
+    ]];
     
 
 }
