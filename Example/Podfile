@@ -55,7 +55,7 @@ post_install do |installer|
   end
 
   # 6、
-#  patch_private_header_imports(installer)
+  patch_private_header_imports(installer)
 end
 
 def patch_private_header_imports(installer)
