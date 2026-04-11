@@ -1,8 +1,8 @@
 {
   "name": "YYVideoListPlayer",
-  "version": "1.0.0",
-  "summary": "A short description of YYVideoListPlayer. ZFAVPlayerManager 313 行 将 &&  改 ||",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "1.0.2",
+  "summary": "iOS video list player built on ZFPlayer for smooth scrolling playback.",
+  "description": "YYVideoListPlayer provides a lightweight video list experience for iOS using\nZFPlayer/AVPlayer. It focuses on smooth scrolling playback, reusable player\nviews, and simple integration for feed-style UIs.",
   "homepage": "https://github.com/htyo/YYVideoListPlayer",
   "license": {
     "type": "MIT",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/htyo/YYVideoListPlayer.git",
-    "tag": "1.0.0"
+    "tag": "1.0.2"
   },
   "platforms": {
     "ios": "13.0"
