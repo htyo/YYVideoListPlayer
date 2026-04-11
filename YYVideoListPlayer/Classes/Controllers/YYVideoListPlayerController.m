@@ -50,17 +50,17 @@
     flowLayout.minimumLineSpacing = 0.0;
     flowLayout.minimumInteritemSpacing = 0.0;
     
-    YYVideoListPlayerView *  playerListView = [[YYVideoListPlayerView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
-    playerListView.delegate = self;
-    playerListView.dataSource = self;
-    [playerListView registerClass:YYVideoListPlayerCell.class forCellWithReuseIdentifier:@"YYVideoListPlayerCell"];
-    [self.view addSubview:playerListView];
-    self.listPlayerView = playerListView;
+    YYVideoListPlayerView *  listPlayerView = [[YYVideoListPlayerView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
+    listPlayerView.delegate = self;
+    listPlayerView.dataSource = self;
+    [listPlayerView registerClass:YYVideoListPlayerCell.class forCellWithReuseIdentifier:@"YYVideoListPlayerCell"];
+    [self.view addSubview:listPlayerView];
+    self.listPlayerView = listPlayerView;
     
 }
 
 - (void)resetVideoListPlayerViewFrame:(CGRect)frame {
-    self.listPlayerView.frame = frame;
+        self.listPlayerView.frame = frame;
 }
 
 - (void)registerVideoListPlayerCellWithClass:(nullable Class)cellClass {
@@ -108,9 +108,12 @@
 - (void)reloadDataWithScrollToItemAtIndexPath:(nullable NSIndexPath *)indexPath completion:(nullable void (^)(void))completion {
     [UIView performWithoutAnimation:^{
         [self.listPlayerView reloadData];
+        [self.listPlayerView layoutIfNeeded];
     }];
-    if (!indexPath) indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self scrollToItemAtIndexPath:indexPath animated:NO completion:completion];
+    NSIndexPath *targetIndexPath = indexPath ?: [NSIndexPath indexPathForItem:0 inSection:0];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self scrollToItemAtIndexPath:targetIndexPath animated:NO completion:completion];
+    });
 }
 
 - (void)insterDataWithIndexPaths:(NSArray <NSIndexPath *>*) indexPaths completion:(nullable void (^)(void))completion {
@@ -239,30 +242,49 @@
 }
 
 - (void)scrollToItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated completion:(nullable void (^)(void))completion {
+    if (![NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self scrollToItemAtIndexPath:indexPath animated:animated completion:completion];
+        });
+        return;
+    }
 
-    if (!indexPath) return;
-
-    // 1️⃣ 滚动到指定位置
-    [UIView performWithoutAnimation:^{
-        [self.listPlayerView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:animated];
-    }];
-    
-    // 2️⃣ 强制触发布局更新，确保目标位置的 Cell 已经被创建
     [self.listPlayerView layoutIfNeeded];
+    if (![self yy_isValidIndexPath:indexPath]) return;
 
-    // 3️⃣ 获取目标位置的 Cell 并同步状态
+    if (animated) {
+        [self.listPlayerView scrollToItemAtIndexPath:indexPath
+                                    atScrollPosition:UICollectionViewScrollPositionTop
+                                            animated:YES];
+    } else {
+        [UIView performWithoutAnimation:^{
+            [self.listPlayerView scrollToItemAtIndexPath:indexPath
+                                        atScrollPosition:UICollectionViewScrollPositionTop
+                                                animated:NO];
+            [self.listPlayerView layoutIfNeeded];
+        }];
+    }
 
-    [self didChangeIndexPathForVisible];
-    
     self.currentIndexPath = indexPath;
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.currentDisplayCell = (YYVideoListPlayerCell *)[self.listPlayerView cellForItemAtIndexPath:indexPath];;
-        
+    [self didChangeIndexPathForVisible];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.currentDisplayCell = (YYVideoListPlayerCell *)[self.listPlayerView cellForItemAtIndexPath:indexPath];
         [self play];
-        
         if (completion) completion();
     });
+}
+
+- (BOOL)yy_isValidIndexPath:(NSIndexPath *)indexPath {
+    if (!indexPath) return NO;
+
+    NSInteger sections = [self.listPlayerView numberOfSections];
+    if (indexPath.section < 0 || indexPath.section >= sections) return NO;
+
+    NSInteger items = [self.listPlayerView numberOfItemsInSection:indexPath.section];
+    if (indexPath.item < 0 || indexPath.item >= items) return NO;
+
+    return YES;
 }
 
 - (void)scrollDidEnd {

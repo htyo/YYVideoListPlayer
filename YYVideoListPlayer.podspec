@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YYVideoListPlayer'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'iOS video list player built on ZFPlayer for smooth scrolling playback.'
 
 # This description is used to generate tags and improve search results.
